@@ -8,3 +8,5 @@ start.add(
     KeyboardButton(text="да(я педик)"),
     KeyboardButton(text="нет(я натурал)")
 )
+
+
