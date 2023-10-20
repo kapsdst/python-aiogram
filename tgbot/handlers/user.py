@@ -1,6 +1,6 @@
 from aiogram import Router
 from aiogram.filters import CommandStart, Command
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
 from tgbot.keyboards.reply import *
 from tgbot.keyboards.inline import *
 from aiogram import F
@@ -12,32 +12,28 @@ user_router = Router()
 
 @user_router.message(CommandStart())
 async def user_start(message: Message):
-    await message.reply("Вы играете в ксго?", reply_markup=start.as_markup(resize_keyboard=True))
+    await message.reply("Здравствуйте, выберите файл", reply_markup=start.as_markup(resize_keyboard=True))
 
 
 
 
-@user_router.message(Command("random"))
-async def cmd_random(message: Message):
-    await message.answer(
-        "Нажмите на кнопку, чтобы бот отправил число от 1 до 10",
-        reply_markup=builder.as_markup()
-    )
 
-@user_router.callback_query(F.data == "random_value")
-async def send_random_value(callback: Message):
-    await callback.message.answer(str(randint(1, 10)))
+@user_router.callback_query(F.data == "1")
+async def send_random_value(callback: CallbackQuery):
+    await callback.message.answer_sticker(sticker="CAACAgIAAxkBAAEKkARlMrAILXyvWJdfpAFyGzbYQxWXxQACTyAAAl2maErMNZObhmRn_zAE")
 
+@user_router.callback_query(F.data == "2")
+async def send_random_value(callback: CallbackQuery):
+    await callback.message.answer_sticker(sticker="CAACAgIAAxkBAAEKkBhlMrQYD3P5YvA4Mdr4WmC69wh-EwACAhUAAoB8oUiebai-kHZhHjAE")
 
+@user_router.callback_query(F.data == "3")
+async def send_random_value(callback: CallbackQuery):
+    await callback.message.answer_sticker(sticker="CAACAgIAAxkBAAEKkB9lMrjPtWzKy2UMsxiMbsTu5wgMvwAC6QsAAubGoUj1k_7LEVr8_jAE")
 
-@user_router.message(lambda message: message.text == "да(я педик)")
-async def on_reply_button_click(message:Message):
+@user_router.callback_query(F.data == "4")
+async def send_random_value(callback: CallbackQuery):
+    await callback.message.answer_sticker(sticker="CAACAgIAAxkBAAEKkCFlMrlo1mDRw_lNWm-D_IKMdL2ArgAC1icAAiIxmEo2zjSsXH_DcTAE")
 
-    await message.answer("Да Шёл ты нахуй!")
-
-
-
-@user_router.message(lambda message: message.text == "(я натурал)")
-async def on_reply_button_click(message:Message):
-
-    await message.answer("Да Шёл ты нахуй")
+@user_router.callback_query(F.data == "5")
+async def send_random_value(callback: CallbackQuery):
+    await callback.message.answer_sticker(sticker="CAACAgIAAxkBAAEKkCNlMrnz0S2z27TYAAE7gWj9rKOPJz0AAkADAAK1cdoGuRLw3B1VGFwwBA")
